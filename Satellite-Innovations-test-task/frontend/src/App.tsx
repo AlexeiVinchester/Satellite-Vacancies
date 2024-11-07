@@ -1,9 +1,11 @@
+import { VacanciesWrapper } from "./components/VacanciesWrapper/VacanciesWrapper";
+
 function App() {
-  return (
-    <>
-      <p className="text-3xl text-red">test task</p>
-    </>
-  );
+    return (
+        <VacanciesWrapper> 
+            test
+        </VacanciesWrapper>
+    );
 };
 
 export { App }; 
