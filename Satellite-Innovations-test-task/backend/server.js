@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const VacancyModel = require('./models/VacancyModel');
 const VacancyResponseModel = require('./models/VacancyResponseModel');
+const initialVacancies = require('./InitialValues/initialVacancies');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -22,22 +24,8 @@ const db = mongoose.connection;
 
 const initializeStudents = async () => {
     try {
-        
         const count = await VacancyModel.estimatedDocumentCount();
-        console.log(`Count: ${count}`)
         if (count === 0) {
-            const initialVacancies = [
-                {
-                    title: "Frontend Developer",
-                    description: "We are looking for a skilled frontend developer with experience in React and JavaScript.",
-                    logo: "https://example.com/logos/frontend.png"
-                },
-                {
-                    title: "Backend Developer",
-                    description: "Join our team as a backend developer, specializing in Node.js and Express.",
-                    logo: "https://example.com/logos/backend.png"
-                },
-            ];
             await VacancyModel.insertMany(initialVacancies);
         }
     } catch (error) {
