@@ -5,20 +5,21 @@ import { StyledButton } from "../StyledButton/StyledButton";
 import { ApplyVacancyForm } from "../ApplyVacancyForm/ApplyVacancyForm";
 
 interface IVacancyCardProps {
-    data: IVacancy | null;
+    data: IVacancy;
 };
 
 const VacancyCard = ({ data }: IVacancyCardProps) => {
     const [isFormHidden, setIsFormHidden] = useState(true);
-    const { _id, title, description, logo } = data;
+    const { title, description } = data;
+
     const handleClick = useCallback(() => {
         setIsFormHidden(!isFormHidden);
     }, [isFormHidden]);
+
     return (
         <Card
             variant="outlined"
             sx={{
-
                 width: '90%',
                 boxShadow: '0 5px 20px #ABB2B9;',
                 borderRadius: '22px'
@@ -26,11 +27,11 @@ const VacancyCard = ({ data }: IVacancyCardProps) => {
         >
             <CardContent>
                 <Typography variant="h4" component="p">
-                    Frontend Developer
+                    {title}
                 </Typography>
                 <Divider  />
                 <Typography variant="h6" component="p">
-                    Description of vacancy
+                    {description}
                 </Typography>
             </CardContent>
             <CardActions>
