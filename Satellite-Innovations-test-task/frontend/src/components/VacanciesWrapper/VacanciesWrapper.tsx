@@ -11,9 +11,7 @@ const VacanciesWrapper = ({ children }: IVacanciesWrapperProps) => {
             sx={{
                 my: '2rem',
                 py: '1rem',
-                backgroundColor: 'rgb(246, 249, 252)',
                 borderRadius: '1rem',
-                minHeight: '100vh'
             }}
         >
             {children}

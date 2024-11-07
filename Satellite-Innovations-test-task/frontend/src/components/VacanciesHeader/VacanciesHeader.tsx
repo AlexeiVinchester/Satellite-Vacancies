@@ -11,7 +11,8 @@ const VacanciesHeader = ({ title }: IVacanciesHeaderProps) => {
                 fontWeight: 400,
                 fontSize: '2rem',
                 color: 'rgb(33, 51, 67)',
-                textAlign: 'center'
+                textAlign: 'center',
+                mb: '2rem'
             }}
         >
             {title}
