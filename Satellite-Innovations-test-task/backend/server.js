@@ -36,8 +36,8 @@ const initializeStudents = async () => {
 app.get('/getVacancies', async (req, res) => {
     try {
         const vacancies = await VacancyModel.find();
-        const responses = await VacancyResponseModel.estimatedDocumentCount();
-        res.status(200).send({vacancies, responses});
+        const amountOfResponses = await VacancyResponseModel.estimatedDocumentCount();
+        res.status(200).send({vacancies, amountOfResponses});
     } catch (error) {
         console.log(error);
         res.status(500).send("Error while loading vacancies");

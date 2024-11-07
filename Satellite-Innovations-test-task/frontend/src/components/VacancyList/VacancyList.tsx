@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { VacancyCard } from "../VacancyCard/VacancyCard";
-import { IVacancy } from "../../types/vacancy.interface";
 import { Spinner } from "../Spinner/Spinner";
+import { IVacanciesData } from "../../types/vacanciesData.interface";
 
 const VacancyList = () => {
-    const [vacancies, setVacancies] = useState<IVacancy[] | null>(null);
+    const [data, setData] = useState<IVacanciesData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    
+
     useEffect(() => {
         const fetchVacancies = async () => {
             setIsLoading(true);
-            try{
+            try {
                 const response = await fetch('http://localhost:3002/getVacancies');
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Server error while loading vacancies');
                 }
                 const data = await response.json();
-                setVacancies(data.vacancies);
+                setData(data);
             } catch (error) {
                 console.log(error)
             } finally {
@@ -26,17 +26,21 @@ const VacancyList = () => {
         fetchVacancies();
     }, []);
 
-    if(isLoading) {
+    if (isLoading) {
         return <Spinner />;
     }
 
     return (
         <div className="flex flex-col items-center gap-8">
-            {
-                vacancies?.map(vacancy => (
-                    <VacancyCard data={vacancy} key={vacancy._id}/>
-                ))
-            }
+            {data && (<>
+                <h4>Amount of responses to vacancies: {data.amountOfResponses}</h4>
+                {
+                    data.vacancies.map(vacancy => (
+                        <VacancyCard data={vacancy} key={vacancy._id} />
+                    ))
+                }
+            </>)}
+
         </div>
     );
 };
