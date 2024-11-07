@@ -1,7 +1,8 @@
 import { Card, CardActions, CardContent, Divider, Typography } from "@mui/material";
 import { IVacancy } from "../../types/vacancy.interface";
+import { useCallback, useState } from "react";
 import { StyledButton } from "../StyledButton/StyledButton";
-import { useState } from "react";
+import { ApplyVacancyForm } from "../ApplyVacancyForm/ApplyVacancyForm";
 
 interface IVacancyCardProps {
     data: IVacancy | null;
@@ -9,7 +10,10 @@ interface IVacancyCardProps {
 
 const VacancyCard = ({ data }: IVacancyCardProps) => {
     const [isFormHidden, setIsFormHidden] = useState(true);
-    //const { _id, title, description, logo } = data;
+    const { _id, title, description, logo } = data;
+    const handleClick = useCallback(() => {
+        setIsFormHidden(!isFormHidden);
+    }, [isFormHidden]);
     return (
         <Card
             variant="outlined"
@@ -31,10 +35,10 @@ const VacancyCard = ({ data }: IVacancyCardProps) => {
             </CardContent>
             <CardActions>
                 <StyledButton 
-                    onClick={() => {setIsFormHidden(false)}}
-                    title={isFormHidden ? 'Apply' : 'Send'}
+                    title={isFormHidden ? 'Apply' : 'Hide'} 
+                    onClick={handleClick}
                 />
-                {!isFormHidden && <input placeholder="enter mail" />}
+                {!isFormHidden && <ApplyVacancyForm />}
             </CardActions>
         </Card>
     );
