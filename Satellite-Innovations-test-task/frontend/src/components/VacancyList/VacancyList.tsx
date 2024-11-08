@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { VacancyCard } from "../VacancyCard/VacancyCard";
 import { Spinner } from "../Spinner/Spinner";
 import { IVacanciesData } from "../../types/vacanciesData.interface";
+import { useDispatch } from "react-redux";
+import { showSnackMessage } from "../../features/snackMessage/snackMessageSlice";
+import { createMessage } from "../../utils/createMessage";
 
 const VacancyList = () => {
     const [data, setData] = useState<IVacanciesData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchVacancies = async () => {
@@ -24,14 +28,21 @@ const VacancyList = () => {
                 }
                 const data = await response.json();
                 setData(data);
+                dispatch(showSnackMessage(createMessage(
+                    'Vacancies were loaded succesfully',
+                    'success'
+                )))
             } catch (error) {
-                console.log(error)
+                dispatch(showSnackMessage(createMessage(
+                    error instanceof Error ? error.message : 'Unknown error occured!',
+                    'error'
+                )))
             } finally {
                 setIsLoading(false);
             }
         };
         fetchVacancies();
-    }, []);
+    }, [dispatch]);
 
     if (isLoading) {
         return <Spinner />;

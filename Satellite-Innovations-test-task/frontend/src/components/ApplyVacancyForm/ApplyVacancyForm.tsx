@@ -1,6 +1,8 @@
 import { IconButton, TextField } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { startSpinner, stopSpinner } from "../../features/spinnerFlag/spinnerFlagSlice";
 
 interface IApplyVacancyForm {
     vacancyId: string;
@@ -8,6 +10,7 @@ interface IApplyVacancyForm {
 
 const ApplyVacancyForm = ({ vacancyId }: IApplyVacancyForm) => {
     const [userEmail, setUserEmail] = useState('');
+    const dispatch = useDispatch();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserEmail(e.target.value);
@@ -15,6 +18,7 @@ const ApplyVacancyForm = ({ vacancyId }: IApplyVacancyForm) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        dispatch(startSpinner('Sending apply...'))
         try {
             const response = await fetch(
                 `https://4933-37-214-25-169.ngrok-free.app/applyVacancy`,
@@ -45,6 +49,7 @@ const ApplyVacancyForm = ({ vacancyId }: IApplyVacancyForm) => {
         } finally {
             setUserEmail('');
             console.log(`id: ${vacancyId}, email: ${userEmail}`);
+            dispatch(stopSpinner());
         }
     };
 

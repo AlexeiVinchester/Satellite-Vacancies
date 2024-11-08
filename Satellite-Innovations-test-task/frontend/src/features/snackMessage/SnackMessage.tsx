@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideSnackMessage } from "./snackMessageSlice";
 import ReactDOM from "react-dom";
 import { selectSnackMessage } from "./snackMessageSelectors";
-import { selectLoadingFlag } from "../loadingFlag/loadingFlagSelectors";
+import { selectSpinnerFlag } from "../spinnerFlag/spinnerFlagSelectors";
 
 const SnackMessage = () => {
     const dispatch = useDispatch();
-    const { isOpen, message, severity } = useSelector(selectSnackMessage);
-    const isLoading = useSelector(selectLoadingFlag);
+    const { isOpen, message: snackMessage, severity } = useSelector(selectSnackMessage);
+    const { isActive, message: spinnerMessage } = useSelector(selectSpinnerFlag);
 
     const handleClose = () => {
         dispatch(hideSnackMessage());
@@ -21,7 +21,7 @@ const SnackMessage = () => {
 
     return ReactDOM.createPortal(
         <Snackbar
-            open={isOpen || isLoading}
+            open={isOpen || isActive}
             autoHideDuration={3000}
             onClose={handleClose}
         >
@@ -29,9 +29,9 @@ const SnackMessage = () => {
                 onClose={handleClose}
                 severity={severity}
                 sx={{ width: '100%' }}
-                icon={isLoading ? <CircularProgress color="inherit" size={20} /> : undefined}
+                icon={isActive ? <CircularProgress color="inherit" size={20} /> : undefined}
             >
-                {isLoading ? 'Loading' : message}
+                {isActive ? spinnerMessage : snackMessage}
             </Alert>
         </Snackbar>,
         portalContainer
