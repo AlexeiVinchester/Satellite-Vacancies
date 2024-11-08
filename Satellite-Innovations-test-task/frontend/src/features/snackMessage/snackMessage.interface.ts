@@ -1,9 +1,7 @@
-export type TSnackMessageSeverity = 'error' | 'success' | 'info' | 'warning';
+import { IMessageInfo } from "../../types/messageInfo.interface";
 
-export interface ISnackMessageState {
+export interface ISnackMessageState extends IMessageInfo {
     isOpen: boolean;
-    message: string | null;
-    severity: TSnackMessageSeverity;
 };
 
 export const initialSnackMessageState: ISnackMessageState = {
