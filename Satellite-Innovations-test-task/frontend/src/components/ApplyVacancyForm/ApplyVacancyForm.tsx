@@ -17,7 +17,7 @@ const ApplyVacancyForm = ({ vacancyId }: IApplyVacancyForm) => {
         e.preventDefault();
         try {
             const response = await fetch(
-                `https://83dd-37-214-25-169.ngrok-free.app/applyVacancy`,
+                `https://4933-37-214-25-169.ngrok-free.app/applyVacancy`,
                 {
                     method: 'POST',
                     body: JSON.stringify({ vacancyId, userEmail }),
