@@ -10,7 +10,7 @@ interface IVacancyCardProps {
 
 const VacancyCard = ({ data }: IVacancyCardProps) => {
     const [isFormHidden, setIsFormHidden] = useState(true);
-    const { title, description } = data;
+    const { _id, title, description } = data;
 
     const handleClick = useCallback(() => {
         setIsFormHidden(!isFormHidden);
@@ -39,7 +39,7 @@ const VacancyCard = ({ data }: IVacancyCardProps) => {
                     title={isFormHidden ? 'Apply' : 'Hide'} 
                     onClick={handleClick}
                 />
-                {!isFormHidden && <ApplyVacancyForm />}
+                {!isFormHidden && <ApplyVacancyForm vacancyId={_id}/>}
             </CardActions>
         </Card>
     );
