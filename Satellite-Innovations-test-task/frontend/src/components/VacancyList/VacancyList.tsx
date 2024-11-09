@@ -15,7 +15,7 @@ const VacancyList = () => {
         const fetchVacancies = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch('https://4933-37-214-25-169.ngrok-free.app/getVacancies', {
+                const response = await fetch('https://4cd0-37-214-25-169.ngrok-free.app/getVacancies', {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
@@ -24,7 +24,8 @@ const VacancyList = () => {
                     }
                 });
                 if (!response.ok) {
-                    throw new Error('Server error while loading vacancies');
+                    const data = await response.json();
+                    throw new Error(`Status: ${response.status} - ${data.error}`);
                 }
                 const data = await response.json();
                 setData(data);

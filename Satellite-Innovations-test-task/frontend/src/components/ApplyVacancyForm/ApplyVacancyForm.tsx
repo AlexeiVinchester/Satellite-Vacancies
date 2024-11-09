@@ -3,6 +3,8 @@ import SendIcon from '@mui/icons-material/Send';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { startSpinner, stopSpinner } from "../../features/spinnerFlag/spinnerFlagSlice";
+import { showSnackMessage } from "../../features/snackMessage/snackMessageSlice";
+import { createMessage } from "../../utils/createMessage";
 
 interface IApplyVacancyForm {
     vacancyId: string;
@@ -21,7 +23,7 @@ const ApplyVacancyForm = ({ vacancyId }: IApplyVacancyForm) => {
         dispatch(startSpinner('Sending apply...'))
         try {
             const response = await fetch(
-                `https://4933-37-214-25-169.ngrok-free.app/applyVacancy`,
+                `https://4cd0-37-214-25-169.ngrok-free.app/applyVacancy`,
                 {
                     method: 'POST',
                     body: JSON.stringify({ vacancyId, userEmail }),
@@ -32,23 +34,31 @@ const ApplyVacancyForm = ({ vacancyId }: IApplyVacancyForm) => {
 
             if (!response.ok) {
                 const data = await response.json();
-                throw new Error(data.error);
+                throw new Error(data.error || `Status: ${response.status} - unknown error occured`);
             }
 
             const data = await response.json();
             if(data.success){
-                console.log(data.success);
+                dispatch(showSnackMessage(createMessage(
+                    data.success,
+                    'success'
+                )));
+                
             } else {
-                console.log(data.error);
+                dispatch(showSnackMessage(createMessage(
+                    data.error,
+                    'error'
+                )))
             }
-
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error.message)
+                dispatch(showSnackMessage(createMessage(
+                    error.message,
+                    'error'
+                )));
             }
         } finally {
             setUserEmail('');
-            console.log(`id: ${vacancyId}, email: ${userEmail}`);
             dispatch(stopSpinner());
         }
     };

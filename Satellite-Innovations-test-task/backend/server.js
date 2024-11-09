@@ -41,10 +41,9 @@ app.get('/getVacancies', async (req, res) => {
         const vacancies = await VacancyModel.find();
         const amountOfResponses = await VacancyResponseModel.estimatedDocumentCount();
         res.status(200).send({ vacancies, amountOfResponses });
-
     } catch (error) {
         console.log(error);
-        res.status(500).send("Error while loading vacancies");
+        res.status(500).send({ error: "Server error while loading vacancies" });
     }
 });
 
@@ -77,7 +76,7 @@ app.post('/applyVacancy', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error while applying to vacancy");
+        res.status(500).send({error: "Error while applying to vacancy"});
     }
 });
 

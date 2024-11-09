@@ -1,0 +1,1 @@
+export type TApiRequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
