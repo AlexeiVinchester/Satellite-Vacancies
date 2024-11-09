@@ -67,16 +67,17 @@ app.post('/applyVacancy', async (req, res) => {
             userEmail,
             vacancyId: ObjectId.createFromHexString(vacancyId)
         };
+
         let result = await VacancyResponseModel.create(vacancyResponse);
         if (result && result._id) {
-            res.status(201).send({ success: 'Vacancy application was added successfully' });
+            res.status(201).send({ success: true });
         } else {
             res.status(500).send({ error: "Response to vacancy wasn't created" });
         }
 
     } catch (error) {
         console.error(error);
-        res.status(500).send({error: "Error while applying to vacancy"});
+        res.status(500).send({ error: "Error while applying to vacancy" });
     }
 });
 

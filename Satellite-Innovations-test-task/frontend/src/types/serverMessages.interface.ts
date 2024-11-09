@@ -3,5 +3,5 @@ export interface IServerErrorMessage {
 };
 
 export interface IServerSuccessMessage {
-    success: string;
+    success: boolean;
 };
