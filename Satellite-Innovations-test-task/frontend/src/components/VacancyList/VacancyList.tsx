@@ -1,32 +1,9 @@
-import { useEffect, useState } from "react";
-import { VacancyCard } from "../VacancyCard/VacancyCard";
+import { useLoadVacancies } from "../../hooks/useLoadVacancies";
 import { Spinner } from "../Spinner/Spinner";
-import { IVacanciesData } from "../../types/vacanciesData.interface";
-import { useDispatch } from "react-redux";
-import { loadVacancies } from "./vacancyList.service";
-import { IServerErrorMessage } from "../../services/apiService";
-import { showErrorMessage, showSuccessLoadingOfVacancies } from "../../utils/snackMessageHelpers";
+import { VacancyCard } from "../VacancyCard/VacancyCard";
 
 const VacancyList = () => {
-    const [data, setData] = useState<IVacanciesData & IServerErrorMessage | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        const fetchVacancies = async () => {
-            setIsLoading(true);
-            try {
-                const data = await loadVacancies();
-                setData(data);
-                dispatch(showSuccessLoadingOfVacancies());
-            } catch (error) {
-                dispatch(showErrorMessage(error))
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchVacancies();
-    }, [dispatch]);
+    const { data, isLoading } = useLoadVacancies();
 
     if (isLoading) {
         return <Spinner />;
