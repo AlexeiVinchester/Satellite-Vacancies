@@ -11,4 +11,5 @@ const initialVacancies = [
     },
 ];
 
+
 module.exports = initialVacancies;
