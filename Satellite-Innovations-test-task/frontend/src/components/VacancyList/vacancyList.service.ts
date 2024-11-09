@@ -1,5 +1,6 @@
 import { apiEndpoints } from "../../config/apiConfig";
-import { IServerErrorMessage, makeApiRequest } from "../../services/apiService"
+import { makeApiRequest } from "../../services/apiService"
+import { IServerErrorMessage } from "../../types/serverMessages.interface";
 import { IVacanciesData } from "../../types/vacanciesData.interface";
 
 const loadVacancies = async () => {

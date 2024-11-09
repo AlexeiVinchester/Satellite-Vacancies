@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loadVacancies } from "../components/VacancyList/vacancyList.service";
-import { IServerErrorMessage } from "../services/apiService";
 import { IVacanciesData } from "../types/vacanciesData.interface";
 import { showSuccessLoadingOfVacancies, showErrorMessage } from "../utils/snackMessageHelpers";
+import { IServerErrorMessage } from "../types/serverMessages.interface";
 
 export const useLoadVacancies = () => {
     const [data, setData] = useState<IVacanciesData & IServerErrorMessage | null>(null);

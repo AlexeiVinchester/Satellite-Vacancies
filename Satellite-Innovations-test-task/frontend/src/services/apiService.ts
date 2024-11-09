@@ -1,8 +1,5 @@
 import { TApiRequestMethod } from "../types/apiRequestMethod.type";
-
-export interface IServerErrorMessage {
-    error?: string;
-};
+import { IServerErrorMessage } from "../types/serverMessages.interface";
 
 const makeApiRequest = async <T = undefined>(url: string, method: TApiRequestMethod, body?: T) => {
     const response = await fetch(url, {
