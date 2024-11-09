@@ -1,6 +1,6 @@
 import { TApiRequestMethod } from "../types/apiRequestMethod.type";
 
-interface IServerErrorMessage {
+export interface IServerErrorMessage {
     error?: string;
 };
 
