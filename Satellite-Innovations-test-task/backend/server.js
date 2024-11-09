@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const ObjectId = require('mongodb').ObjectId
 
 const express = require('express');
@@ -15,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost:27017/local")
+mongoose.connect(process.env.DB_CONNECTION_STRING)
     .then(async () => {
         console.log("Connected to MongoDB");
         await initializeStudents();
@@ -81,6 +83,8 @@ app.post('/applyVacancy', async (req, res) => {
     }
 });
 
-app.listen(3002, () => {
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
     console.log('Server-vacancies-app is running!');
 });
