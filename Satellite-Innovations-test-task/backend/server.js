@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const VacancyModel = require('./models/VacancyModel');
-const VacancyResponseModel = require('./models/VacancyResponseModel');
+const VacancyApplicationModel = require('./models/VacancyApplicationModel');
 const initialVacancies = require('./InitialValues/initialVacancies');
 
 const geoip = require('geoip-lite');
@@ -39,8 +39,8 @@ const initializeStudents = async () => {
 app.get('/getVacancies', async (req, res) => {
     try {
         const vacancies = await VacancyModel.find();
-        const amountOfResponses = await VacancyResponseModel.estimatedDocumentCount();
-        res.status(200).send({ vacancies, amountOfResponses });
+        const amountOfApplications = await VacancyApplicationModel.estimatedDocumentCount();
+        res.status(200).send({ vacancies, amountOfApplications: amountOfApplications });
     } catch (error) {
         console.log(error);
         res.status(500).send({ error: "Server error while loading vacancies" });
@@ -63,16 +63,16 @@ app.post('/applyVacancy', async (req, res) => {
         }
 
         const { userEmail, vacancyId } = req.body;
-        const vacancyResponse = {
+        const vacancyApplication = {
             userEmail,
             vacancyId: ObjectId.createFromHexString(vacancyId)
         };
 
-        let result = await VacancyResponseModel.create(vacancyResponse);
+        let result = await VacancyApplicationModel.create(vacancyApplication);
         if (result && result._id) {
             res.status(201).send({ success: true });
         } else {
-            res.status(500).send({ error: "Response to vacancy wasn't created" });
+            res.status(500).send({ error: "Application for vacancy wasn't created in DB" });
         }
 
     } catch (error) {
@@ -82,5 +82,5 @@ app.post('/applyVacancy', async (req, res) => {
 });
 
 app.listen(3002, () => {
-    console.log('Server-tutor-app is running!');
+    console.log('Server-vacancies-app is running!');
 });

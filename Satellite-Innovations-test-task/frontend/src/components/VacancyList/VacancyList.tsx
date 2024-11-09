@@ -12,7 +12,7 @@ const VacancyList = () => {
     return (
         <div className="flex flex-col items-center gap-8">
             {data && (<>
-                <h4>Amount of applications for vacancies: {data.amountOfResponses}</h4>
+                <h4>Amount of applications for vacancies: {data.amountOfApplications}</h4>
                 {
                     data.vacancies.map(vacancy => (
                         <VacancyCard data={vacancy} key={vacancy._id} />

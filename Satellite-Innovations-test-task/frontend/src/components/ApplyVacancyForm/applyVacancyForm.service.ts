@@ -4,7 +4,7 @@ import { IVacancyApplication } from "../../types/vacancyApplication.interface"
 
 export const applyForVacancy = async (body: IVacancyApplication) => {
     const result: IServerErrorMessage & IServerSuccessMessage = await makeApiRequest(
-        `https://4cd0-37-214-25-169.ngrok-free.app/applyVacancy`,
+        `https://64a9-37-214-25-169.ngrok-free.app/applyVacancy`,
         'POST',
         body
     );

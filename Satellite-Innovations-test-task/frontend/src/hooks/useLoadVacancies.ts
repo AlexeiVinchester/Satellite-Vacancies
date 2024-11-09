@@ -11,7 +11,7 @@ export const useLoadVacancies = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchVacancies = async () => {
+        (async () => {
             setIsLoading(true);
             try {
                 const data = await loadVacancies();
@@ -22,8 +22,7 @@ export const useLoadVacancies = () => {
             } finally {
                 setIsLoading(false);
             }
-        };
-        fetchVacancies();
+        })();
     }, [dispatch]);
 
     return { data, isLoading };
