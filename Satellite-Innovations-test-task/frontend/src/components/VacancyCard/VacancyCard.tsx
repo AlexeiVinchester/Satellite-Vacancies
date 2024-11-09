@@ -1,20 +1,16 @@
 import { Card, CardActions, CardContent, Divider, Typography } from "@mui/material";
 import { IVacancy } from "../../types/vacancy.interface";
-import { useCallback, useState } from "react";
 import { StyledButton } from "../StyledButton/StyledButton";
 import { ApplyVacancyForm } from "../ApplyVacancyForm/ApplyVacancyForm";
+import { useShowApplyForm } from "../../hooks/useShowApplyForm";
 
 interface IVacancyCardProps {
     data: IVacancy;
 };
 
 const VacancyCard = ({ data }: IVacancyCardProps) => {
-    const [isFormHidden, setIsFormHidden] = useState(true);
+    const { isFormHidden, handleClick } = useShowApplyForm()
     const { _id, title, description } = data;
-
-    const handleClick = useCallback(() => {
-        setIsFormHidden(!isFormHidden);
-    }, [isFormHidden]);
 
     return (
         <Card
@@ -29,17 +25,17 @@ const VacancyCard = ({ data }: IVacancyCardProps) => {
                 <Typography variant="h4" component="p">
                     {title}
                 </Typography>
-                <Divider  />
+                <Divider />
                 <Typography variant="h6" component="p">
                     {description}
                 </Typography>
             </CardContent>
             <CardActions>
-                <StyledButton 
-                    title={isFormHidden ? 'Apply' : 'Hide'} 
+                <StyledButton
+                    title={isFormHidden ? 'Apply' : 'Hide'}
                     onClick={handleClick}
                 />
-                {!isFormHidden && <ApplyVacancyForm vacancyId={_id}/>}
+                {!isFormHidden && <ApplyVacancyForm vacancyId={_id} />}
             </CardActions>
         </Card>
     );

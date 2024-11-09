@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { applyForVacancy } from "../components/ApplyVacancyForm/applyVacancyForm.service";
 import { startSpinner, stopSpinner } from "../features/spinnerFlag/spinnerFlagSlice";
@@ -8,9 +8,9 @@ export const useApplyVacancy = (vacancyId: string) => {
     const [userEmail, setUserEmail] = useState('');
     const dispatch = useDispatch();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setUserEmail(e.target.value);
-    };
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
