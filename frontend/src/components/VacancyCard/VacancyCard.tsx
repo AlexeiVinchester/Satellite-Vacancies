@@ -12,7 +12,7 @@ interface IVacancyCardProps {
 const VacancyCard = ({ data }: IVacancyCardProps) => {
     const { isFormHidden, handleClick } = useShowApplyForm()
     const { _id, title, description } = data;
-    console.log(`${baseDomain}${data.logo}`)
+
     return (
         <Card
             variant="outlined"
