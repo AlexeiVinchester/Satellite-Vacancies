@@ -5,6 +5,7 @@ const ObjectId = require('mongodb').ObjectId
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 const VacancyModel = require('./models/VacancyModel');
 const VacancyApplicationModel = require('./models/VacancyApplicationModel');
@@ -17,13 +18,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.DB_CONNECTION_STRING)
-    .then(async () => {
-        console.log("Connected to MongoDB");
-        await initializeVacancies();
-    }).catch(error => {
-        console.error("MongoDB connection error:", error);
-    });
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 (async () => {
     try {

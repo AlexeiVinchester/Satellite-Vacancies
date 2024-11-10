@@ -3,6 +3,7 @@ import { IVacancy } from "../../types/vacancy.interface";
 import { StyledButton } from "../StyledButton/StyledButton";
 import { ApplyVacancyForm } from "../ApplyVacancyForm/ApplyVacancyForm";
 import { useShowApplyForm } from "./useShowApplyForm";
+import { baseDomain } from "../../config/apiConfig";
 
 interface IVacancyCardProps {
     data: IVacancy;
@@ -11,7 +12,7 @@ interface IVacancyCardProps {
 const VacancyCard = ({ data }: IVacancyCardProps) => {
     const { isFormHidden, handleClick } = useShowApplyForm()
     const { _id, title, description } = data;
-
+    console.log(`${baseDomain}${data.logo}`)
     return (
         <Card
             variant="outlined"
@@ -22,9 +23,12 @@ const VacancyCard = ({ data }: IVacancyCardProps) => {
             }}
         >
             <CardContent>
-                <Typography variant="h4" component="p">
-                    {title}
-                </Typography>
+                <div className="flex items-center mb-2 gap-2">
+                    <img src={`${baseDomain}${data.logo}`} />
+                    <Typography variant="h4" component="p">
+                        {title}
+                    </Typography>
+                </div>
                 <Divider />
                 <Typography variant="h6" component="p">
                     {description}
