@@ -5,5 +5,8 @@ const VacancySchema = new mongoose.Schema({
     logo: String
 }, { versionKey: false });
 
-const VacancyModel = mongoose.model('vacancies', VacancySchema);
+const VacancyModel = mongoose.model(
+    process.env.MONGO_COLLECTION_VACANCIES,
+    VacancySchema
+);
 module.exports = VacancyModel;

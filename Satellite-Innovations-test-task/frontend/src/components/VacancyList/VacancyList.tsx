@@ -1,6 +1,7 @@
-import { useLoadVacancies } from "../../hooks/useLoadVacancies";
+import { IVacancy } from "../../types/vacancy.interface";
 import { Spinner } from "../Spinner/Spinner";
 import { VacancyCard } from "../VacancyCard/VacancyCard";
+import { useLoadVacancies } from "./useLoadVacancies";
 
 const VacancyList = () => {
     const { data, isLoading } = useLoadVacancies();
@@ -18,7 +19,7 @@ const VacancyList = () => {
             {data && (<>
                 <h4>Amount of applications for vacancies: {data.amountOfApplications}</h4>
                 {
-                    data.vacancies.map(vacancy => (
+                    data.vacancies.map((vacancy: IVacancy) => (
                         <VacancyCard data={vacancy} key={vacancy._id} />
                     ))
                 }

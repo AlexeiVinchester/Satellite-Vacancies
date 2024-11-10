@@ -58,6 +58,14 @@ DB_CONNECTION_STRING=your_database_connection_string
 
 (example DB_CONNECTION_STRING=mongodb://localhost:27017/local)
 
+MONGO_COLLECTION_VACANCIES=your_name_for_vacancies_table
+
+(example MONGO_COLLECTION_VACANCIES=vacancies)
+
+MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=your_name_applications_for_vacancies_table
+
+(example MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=vacancies_applications)
+
 4. Running of full project locally or with your remote server
 
 This application should work with checking of country of applying for vacancy

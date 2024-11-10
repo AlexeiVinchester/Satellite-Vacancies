@@ -1,4 +1,4 @@
-const initialVacancies = [
+const vacancies = [
     {
         title: "Frontend Developer",
         description: "We are looking for a skilled frontend developer with experience in React and JavaScript.",
@@ -31,4 +31,4 @@ const initialVacancies = [
     }
 ];
 
-module.exports = initialVacancies;
+module.exports = vacancies;

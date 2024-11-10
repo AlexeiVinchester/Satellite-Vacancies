@@ -8,7 +8,7 @@ const cors = require('cors');
 
 const VacancyModel = require('./models/VacancyModel');
 const VacancyApplicationModel = require('./models/VacancyApplicationModel');
-const initialVacancies = require('./InitialValues/initialVacancies');
+const vacancies = require('./data/vacancies');
 
 const geoip = require('geoip-lite');
 const { allowedCountry } = require('./config');
@@ -20,18 +20,26 @@ app.use(express.json());
 mongoose.connect(process.env.DB_CONNECTION_STRING)
     .then(async () => {
         console.log("Connected to MongoDB");
-        await initializeStudents();
+        await initializeVacancies();
     }).catch(error => {
         console.error("MongoDB connection error:", error);
     });
 
-const db = mongoose.connection;
+(async () => {
+    try{
+        await mongoose.connect(process.env.DB_CONNECTION_STRING);
+        console.log('Connected to MongoDB')
+        await initializeVacancies()
+    } catch (error) {
+        console.error("MongoDB connection error:", error);
+    }
+})();
 
-const initializeStudents = async () => {
+const initializeVacancies = async () => {
     try {
         const count = await VacancyModel.estimatedDocumentCount();
         if (count === 0) {
-            await VacancyModel.insertMany(initialVacancies);
+            await VacancyModel.insertMany(vacancies);
         }
     } catch (error) {
         console.error('Error while initialising', error);
@@ -42,7 +50,7 @@ app.get('/getVacancies', async (req, res) => {
     try {
         const vacancies = await VacancyModel.find();
         const amountOfApplications = await VacancyApplicationModel.estimatedDocumentCount();
-        res.status(200).send({ vacancies, amountOfApplications: amountOfApplications });
+        res.status(200).send({ vacancies, amountOfApplications});
     } catch (error) {
         console.log(error);
         res.status(500).send({ error: "Server error while loading vacancies" });

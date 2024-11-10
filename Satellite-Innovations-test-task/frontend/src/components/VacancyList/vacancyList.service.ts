@@ -4,7 +4,6 @@ import { IServerErrorMessage } from "../../types/serverMessages.interface";
 import { IVacanciesData } from "../../types/vacanciesData.interface";
 
 const loadVacancies = async () => {
-    console.log(apiEndpoints.getVacancies)
     const result: IVacanciesData | IServerErrorMessage = await makeApiRequest(
         apiEndpoints.getVacancies,
         'GET'

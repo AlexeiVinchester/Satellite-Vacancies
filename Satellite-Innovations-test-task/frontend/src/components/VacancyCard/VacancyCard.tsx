@@ -2,7 +2,7 @@ import { Card, CardActions, CardContent, Divider, Typography } from "@mui/materi
 import { IVacancy } from "../../types/vacancy.interface";
 import { StyledButton } from "../StyledButton/StyledButton";
 import { ApplyVacancyForm } from "../ApplyVacancyForm/ApplyVacancyForm";
-import { useShowApplyForm } from "../../hooks/useShowApplyForm";
+import { useShowApplyForm } from "./useShowApplyForm";
 
 interface IVacancyCardProps {
     data: IVacancy;
