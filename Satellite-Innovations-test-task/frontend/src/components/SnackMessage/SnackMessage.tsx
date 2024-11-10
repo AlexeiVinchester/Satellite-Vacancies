@@ -1,9 +1,9 @@
 import { Alert, CircularProgress, Snackbar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { hideSnackMessage } from "./snackMessageSlice";
+import { hideSnackMessage } from "../../features/snackMessage/snackMessageSlice";
 import ReactDOM from "react-dom";
-import { selectSnackMessage } from "./snackMessageSelectors";
-import { selectSpinnerFlag } from "../spinnerFlag/spinnerFlagSelectors";
+import { selectSnackMessage } from "../../features/snackMessage/snackMessageSelectors";
+import { selectSpinnerFlag } from "../../features/spinnerFlag/spinnerFlagSelectors";
 
 const SnackMessage = () => {
     const dispatch = useDispatch();

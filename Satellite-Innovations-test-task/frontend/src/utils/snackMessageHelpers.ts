@@ -13,14 +13,7 @@ export const showErrorMessage = (error: unknown) => {
     ));
 };
 
-const showSuccessMessage = (message: string) => {
+export const showSuccessMessage = (message: string) => {
     return showSnackMessage(createMessage(message, 'success'));
 };
 
-export const showSuccessLoadingOfVacancies = () => {
-    return showSuccessMessage('Vacancies were loaded succesfully');
-};
-
-export const showSuccessAdditionOfApplication = () => {
-    return showSuccessMessage('Vacancy application was added successfully');
-};

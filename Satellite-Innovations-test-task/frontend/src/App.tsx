@@ -1,14 +1,14 @@
 import { VacanciesWrapper } from "./components/VacanciesWrapper/VacanciesWrapper";
 import { VacanciesHeader } from "./components/VacanciesHeader/VacanciesHeader";
-import { VacancyList } from "./components/VacancyList/VacancyList";
-import { SnackMessage } from "./features/snackMessage/SnackMessage";
+import { VacanciesDataContainer } from "./components/VacanciesDataContainer/VacanciesDataContainer";
+import { SnackMessage } from "./components/SnackMessage/SnackMessage";
 
 function App() {
     return (
         <>
             <VacanciesWrapper>
                 <VacanciesHeader title="Vacancies" />
-                <VacancyList />
+                <VacanciesDataContainer />
             </VacanciesWrapper>
             <SnackMessage />
         </>

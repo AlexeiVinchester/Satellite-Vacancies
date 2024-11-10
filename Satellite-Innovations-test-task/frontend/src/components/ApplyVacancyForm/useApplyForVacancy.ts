@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { startSpinner, stopSpinner } from "../../features/spinnerFlag/spinnerFlagSlice";
-import { showSuccessAdditionOfApplication, showErrorMessage } from "../../utils/snackMessageHelpers";
+import { showErrorMessage, showSuccessMessage } from "../../utils/snackMessageHelpers";
 import { applyForVacancy } from "./applyVacancyForm.service";
 
 export const useApplyVacancy = (vacancyId: string) => {
@@ -21,7 +21,7 @@ export const useApplyVacancy = (vacancyId: string) => {
         try {
             const data = await applyForVacancy({ userEmail, vacancyId });
             if ('success' in data) {
-                dispatch(showSuccessAdditionOfApplication());
+                dispatch(showSuccessMessage('Successfull sending of applications'));
             }
         } catch (error) {
             dispatch(showErrorMessage(error));

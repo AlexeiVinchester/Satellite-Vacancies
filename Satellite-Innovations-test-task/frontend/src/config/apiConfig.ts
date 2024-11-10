@@ -1,6 +1,6 @@
-export const baseDomain = import.meta.env.VITE_BASE_URL || 'http://localhost:3002';
+export const baseDomain = import.meta.env.VITE_BASE_URL || import.meta.env.VITE_LOCAL_URL;
 
 export const apiEndpoints = {
-    getVacancies: `${baseDomain}/getVacancies`,
-    applyVacancy: `${baseDomain}/applyVacancy`
-}
+    getVacancies: "/getVacancies",
+    applyVacancy: "/applyVacancy"
+};

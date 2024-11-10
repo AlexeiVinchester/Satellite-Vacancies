@@ -58,11 +58,11 @@ DB_CONNECTION_STRING=your_database_connection_string
 
 (example DB_CONNECTION_STRING=mongodb://localhost:27017/local)
 
-MONGO_COLLECTION_VACANCIES=your_name_for_vacancies_table
+MONGO_COLLECTION_VACANCIES=your_name_of_vacancies_table
 
 (example MONGO_COLLECTION_VACANCIES=vacancies)
 
-MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=your_name_applications_for_vacancies_table
+MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=your_name_of_applications_for_vacancies_table
 
 (example MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=vacancies_applications)
 

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { IServerErrorMessage } from "../../types/serverMessages.interface";
 import { IVacanciesData } from "../../types/vacanciesData.interface";
-import { showSuccessLoadingOfVacancies, showErrorMessage } from "../../utils/snackMessageHelpers";
-import { loadVacancies } from "./vacancyList.service";
+import { showErrorMessage, showSuccessMessage } from "../../utils/snackMessageHelpers";
+import { loadVacancies } from "./vacanciesDataContainer.service";
 
 export const useLoadVacancies = () => {
     const [data, setData] = useState<IVacanciesData | IServerErrorMessage | null>(null);
@@ -16,7 +16,7 @@ export const useLoadVacancies = () => {
             try {
                 const data = await loadVacancies();
                 setData(data);
-                dispatch(showSuccessLoadingOfVacancies());
+                dispatch(showSuccessMessage('Vacancies were loaded succesfully'));
             } catch (error) {
                 dispatch(showErrorMessage(error));
             } finally {

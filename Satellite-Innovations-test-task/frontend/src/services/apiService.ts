@@ -1,8 +1,9 @@
+import { baseDomain } from "../config/apiConfig";
 import { TApiRequestMethod } from "../types/apiRequestMethod.type";
 import { IServerErrorMessage } from "../types/serverMessages.interface";
 
 const makeApiRequest = async <T = undefined>(url: string, method: TApiRequestMethod, body?: T) => {
-    const response = await fetch(url, {
+    const response = await fetch(`${baseDomain}${url}`, {
         method,
         headers: {
             "Content-Type": "application/json",

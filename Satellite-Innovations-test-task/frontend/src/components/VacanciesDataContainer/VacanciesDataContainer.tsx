@@ -1,9 +1,9 @@
-import { IVacancy } from "../../types/vacancy.interface";
+import { AmountOfApplicationsLabel } from "../AmountOfApplicationsLabel/AmountOfApplicationsLabel";
+import { ListOfVacancies } from "../ListOfVacancies/ListOfVacancies";
 import { Spinner } from "../Spinner/Spinner";
-import { VacancyCard } from "../VacancyCard/VacancyCard";
 import { useLoadVacancies } from "./useLoadVacancies";
 
-const VacancyList = () => {
+const VacanciesDataContainer = () => {
     const { data, isLoading } = useLoadVacancies();
 
     if (isLoading) {
@@ -17,16 +17,12 @@ const VacancyList = () => {
     return (
         <div className="flex flex-col items-center gap-8">
             {data && (<>
-                <h4>Amount of applications for vacancies: {data.amountOfApplications}</h4>
-                {
-                    data.vacancies.map((vacancy: IVacancy) => (
-                        <VacancyCard data={vacancy} key={vacancy._id} />
-                    ))
-                }
+                <AmountOfApplicationsLabel value={data.amountOfApplications} />
+                <ListOfVacancies data={data.vacancies} />
             </>)}
 
         </div>
     );
 };
 
-export { VacancyList };
+export { VacanciesDataContainer };
