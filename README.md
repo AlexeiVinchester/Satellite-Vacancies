@@ -1,121 +1,133 @@
-Satellite Vacancies
 
-Introduction: 
+# Satellite Vacancies
 
-Satellite Vacancies app has an opportunity to load vacancies from MongoDB, to load amount of applications for different vacancies and also give you an opportunity to send apply for each vacancy entering your email. If you have no vacancies in your "vacancies" DB, server will check it and add some initial vacancies. You can fill this initial array in /backend/InitialValues/initialVacancies.js. There are six vacancies by default. 
+## Introduction
 
-Also this app has an opportunity to check country of applying by ip and avoid applying for vacancy not from Belarus.
+The **Satellite Vacancies** app allows you to:
+- Load job vacancies from MongoDB.
+- View the number of applications for each vacancy.
+- Apply for a vacancy by submitting your email.
+  
+If there are no vacancies in your "vacancies" collection in MongoDB, the server will initialize it with sample vacancies from `/backend/data/vacancies.js`. By default, six vacancies are available for initialization.
 
-If your client and your MongoDB are in localhosts, this checking will be skipped by server. 
+Additionally, the app can check the applicant's country based on their IP and restrict applications to those from Belarus. If both your client and MongoDB are running on localhost, the server will skip this country check.
 
-1. Clone repository 
+---
 
+### 1. Clone the Repository 
+
+```bash
 git clone git@github.com:AlexeiVinchester/Satellite-Vacancies.git
-
 cd Satellite-Vacancies          
+```
 
-2. Install dependencies 
+### 2. Install Dependencies 
 
-npm install (in Satellite-Vacancies/) 
+From the `Satellite-Vacancies/` directory:
 
-cd frontend/
-
+```bash
 npm install
-
+cd frontend/
+npm install
+cd ../backend/  
+npm install
 cd ..
+```
 
-cd backend/  
+---
 
-npm install
+### 3. Set Up Environment Variables
 
-cd..
+You need `.env` files for both the frontend and backend, specifying base URLs and other environment-specific settings.
 
-3. Environment variables
+- **frontend/.env**
 
-You should have .env files both in frontend and backend parts where you should save your base urls for app
+  ```plaintext
+  VITE_LOCAL_URL=your_local_url 
+  # Example: VITE_LOCAL_URL=http://localhost:3002
 
-- frontend/.env
+  VITE_BASE_URL=your_base_url 
+  # Example: VITE_BASE_URL=https://your-remote-server.net
+  ```
 
-VITE_LOCAL_URL=your_local_url 
+  - If your server is remote, set `VITE_BASE_URL` to the server's URL.
+  - For local testing on localhost, set `VITE_LOCAL_URL` and leave `VITE_BASE_URL` blank.
+  - For testing with ngrok, `VITE_BASE_URL` will be automatically set by the server when you start with `npm run start:ngrok` (see Step 5).
 
-(example: VITE_LOCAL_URL=http://localhost:3002)
+- **backend/.env**
 
-VITE_BASE_URL=your_base_url 
+  ```plaintext
+  PORT=your_port 
+  # Example: PORT=3002
 
-(example: VITE_BASE_URL=https://something.net)
+  DB_CONNECTION_STRING=your_database_connection_string 
+  # Example: DB_CONNECTION_STRING=mongodb://localhost:27017/local
 
-(As for this value: VITE_BASE_URL - if you save your server somewhere not locally, you should put it's url here, and follow step 4. If you don't have your server remote, you don't need to put VITE_BASE_URL, and if you want to test work locally on localhosts for client and DB, folow step 4 (in this case server will skip checking of country).
+  MONGO_COLLECTION_VACANCIES=your_vacancies_collection_name
+  # Example: MONGO_COLLECTION_VACANCIES=vacancies
 
-But if you want to test work of this application with ngrok api, there is no need to put value VITE_BASE_URL in .env because server will do it in the next step. When you will start server with ngrok it will check this field in frontend/.env and put new ngrok domain inside as a value of VITE_BASE_URL)
+  MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=your_applications_collection_name
+  # Example: MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=vacancies_applications
+  ```
 
-- backend/.env
+---
 
-PORT=your_port 
+### 4. Running the Full Project (Local or Remote Server)
 
-(example: PORT=3002)
+If you are running both the client and MongoDB on localhost, the IP check will be automatically skipped. Use the following commands to start the app in this setup:
 
-DB_CONNECTION_STRING=your_database_connection_string 
+- **Full Start** (frontend and backend together):
 
-(example DB_CONNECTION_STRING=mongodb://localhost:27017/local)
+  ```bash
+  npm run start:all
+  ```
 
-MONGO_COLLECTION_VACANCIES=your_name_of_vacancies_table
+- **Separate Start**:
 
-(example MONGO_COLLECTION_VACANCIES=vacancies)
+  - Start frontend:
 
-MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=your_name_of_applications_for_vacancies_table
+    ```bash
+    cd frontend/
+    npm run dev
+    ```
 
-(example MONGO_COLLECTION_APPLICATIONS_FOR_VACANCIES=vacancies_applications)
+  - Start backend:
 
-4. Running of full project locally or with your remote server
+    ```bash
+    cd backend/
+    nodemon server.js
+    ```
 
-This application should work with checking of country of applying for vacancy
-If you work locally, when your client in localhost and your DB in localhost, this app has such opportunity to skip checking of ip in this case. To run app only in this way, you can next steps. 
+If you are using a remote server, the country check will still be active by default.
 
-- full start 
+---
 
-cd Satellite-Vacancies/
+### 5. Running the Project with IP Country Check (using ngrok)
 
-npm run start:all
+To test the country check feature locally, you can use [ngrok](https://ngrok.com/) to create a virtual domain for your server. This will simulate a non-local server, allowing you to test IP-based restrictions. With a VPN, you can further test responses from different countries.
 
-If you want separately: 
+- **Separate Start with ngrok**:
 
-- start frontend 
+  - Start frontend:
 
-cd frontend/
+    ```bash
+    cd frontend/
+    npm run dev
+    ```
 
-npm run dev
+  - Start backend with ngrok:
 
-- start backend
+    ```bash
+    cd backend/
+    npm run start:ngrok
+    ```
 
-cd backend/  
+- **Full Start with ngrok** (frontend and backend together):
 
-nodemon server.js
+  ```bash
+  npm run start:all-ngrok
+  ```
 
-Also it will work the same way if you will have remote server (but with checking of country).
+---
 
-5. Running of full project with ip checking
-
-This application should work with checking of country while applying for vacancy. In order to test app locally you can change your server url with ngrok api. It can help you to made an illusion that your server is not locally. And ngrok will give new virtual domain to your server. And with VPN on your computer or browser you can test checking of country.
-
-- If you want to run separately, follow this instructions:
-
-srart frontend
-
-cd frontend/
-
-npm run dev
-
-start backend
-
-cd backend/  
-
-npm run start:ngrok
-
-- But if you want to start your app once, follow this
-
-full start 
-
-cd Satellite-Vacancies/
-
-npm run start:all-ngrok
-
+Now you’re ready to use the **Satellite Vacancies** app! Test vacancy loading, application submission, and the country-based application restriction. Enjoy!
