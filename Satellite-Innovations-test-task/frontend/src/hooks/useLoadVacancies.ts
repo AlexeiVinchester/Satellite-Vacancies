@@ -6,7 +6,7 @@ import { showSuccessLoadingOfVacancies, showErrorMessage } from "../utils/snackM
 import { IServerErrorMessage } from "../types/serverMessages.interface";
 
 export const useLoadVacancies = () => {
-    const [data, setData] = useState<IVacanciesData & IServerErrorMessage | null>(null);
+    const [data, setData] = useState<IVacanciesData | IServerErrorMessage | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
 

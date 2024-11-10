@@ -9,6 +9,10 @@ const VacancyList = () => {
         return <Spinner />;
     }
 
+    if (!data || 'error' in data) {
+        return <p className="flex justify-center">Yooops, No vacancies</p>;
+    }
+
     return (
         <div className="flex flex-col items-center gap-8">
             {data && (<>
