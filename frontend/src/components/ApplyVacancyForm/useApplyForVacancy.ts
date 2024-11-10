@@ -19,7 +19,7 @@ export const useApplyVacancy = (vacancyId: string) => {
         dispatch(startSpinner('Sending apply...'));
         setIsSending(true);
         try {
-            const data = await applyForVacancy({ userEmail, vacancyId });
+            const data = await applyForVacancy(vacancyId, { userEmail });
             if ('success' in data) {
                 dispatch(showSuccessMessage('Successfull sending of applications'));
             }

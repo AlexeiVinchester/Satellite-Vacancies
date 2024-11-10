@@ -3,9 +3,9 @@ import { makeApiRequest } from "../../services/apiService"
 import { IServerErrorMessage, IServerSuccessMessage } from "../../types/serverMessages.interface";
 import { IVacancyApplication } from "../../types/vacancyApplication.interface"
 
-export const applyForVacancy = async (body: IVacancyApplication) => {
+export const applyForVacancy = async (id: string, body: IVacancyApplication) => {
     const result: IServerErrorMessage | IServerSuccessMessage = await makeApiRequest(
-        apiEndpoints.applyVacancy,
+        `${apiEndpoints.vacancies}/${id}/apply`,
         'POST',
         body
     );

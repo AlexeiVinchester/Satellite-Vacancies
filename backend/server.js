@@ -26,7 +26,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING)
     });
 
 (async () => {
-    try{
+    try {
         await mongoose.connect(process.env.DB_CONNECTION_STRING);
         console.log('Connected to MongoDB')
         await initializeVacancies()
@@ -46,18 +46,18 @@ const initializeVacancies = async () => {
     }
 };
 
-app.get('/getVacancies', async (req, res) => {
+app.get('/vacancies', async (req, res) => {
     try {
         const vacancies = await VacancyModel.find();
         const amountOfApplications = await VacancyApplicationModel.estimatedDocumentCount();
-        res.status(200).send({ vacancies, amountOfApplications});
+        res.status(200).send({ vacancies, amountOfApplications });
     } catch (error) {
         console.log(error);
         res.status(500).send({ error: "Server error while loading vacancies" });
     }
 });
 
-app.post('/applyVacancy', async (req, res) => {
+app.post('/vacancies/:vacancyId/apply', async (req, res) => {
     try {
 
         const clientIp = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
@@ -72,7 +72,8 @@ app.post('/applyVacancy', async (req, res) => {
             }
         }
 
-        const { userEmail, vacancyId } = req.body;
+        const { userEmail } = req.body;
+        const { vacancyId } = req.params;
         const vacancyApplication = {
             userEmail,
             vacancyId: ObjectId.createFromHexString(vacancyId)
