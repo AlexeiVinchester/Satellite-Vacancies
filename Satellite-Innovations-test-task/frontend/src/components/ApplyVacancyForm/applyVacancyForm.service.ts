@@ -4,7 +4,7 @@ import { IServerErrorMessage, IServerSuccessMessage } from "../../types/serverMe
 import { IVacancyApplication } from "../../types/vacancyApplication.interface"
 
 export const applyForVacancy = async (body: IVacancyApplication) => {
-    const result: IServerErrorMessage & IServerSuccessMessage = await makeApiRequest(
+    const result: IServerErrorMessage | IServerSuccessMessage = await makeApiRequest(
         apiEndpoints.applyVacancy,
         'POST',
         body
