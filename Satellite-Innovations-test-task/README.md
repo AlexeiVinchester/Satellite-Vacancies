@@ -1,5 +1,13 @@
 Satellite Vacancies
 
+Introduction: 
+
+Satellite Vacancies app has an opportunity to load vacancies from MongoDB, to load amount of applications for different vacancies and also give you an opportunity to send apply for each vacancy entering your email. If you have no vacancies in your "vacancies" DB, server will check it and add some initial vacancies. You can fill this initial array in /backend/InitialValues/initialVacancies.js. There are six vacancies by default. 
+
+Also this app has an opportunity to check country of applying by ip and avoid applying for vacancy not from Belarus.
+
+If your client and your MongoDB are in localhosts, this checking will be skipped by server. 
+
 1. Clone repository 
 
 git clone git@github.com:AlexeiVinchester/Satellite-Vacancies.git
