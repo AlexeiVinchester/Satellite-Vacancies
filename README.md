@@ -12,11 +12,11 @@ If your client and your MongoDB are in localhosts, this checking will be skipped
 
 git clone git@github.com:AlexeiVinchester/Satellite-Vacancies.git
 
-cd Satellite-Vacancies/Satellite-Innovations-test-task           
+cd Satellite-Vacancies          
 
 2. Install dependencies 
 
-npm install (in Satellite-Vacancies/Satellite-Innovations-test-task ) 
+npm install (in Satellite-Vacancies/) 
 
 cd frontend/
 
@@ -73,7 +73,7 @@ If you work locally, when your client in localhost and your DB in localhost, thi
 
 - full start 
 
-cd Satellite-Vacancies/Satellite-Innovations-test-task 
+cd Satellite-Vacancies/
 
 npm run start:all
 
@@ -115,7 +115,7 @@ npm run start:ngrok
 
 full start 
 
-cd Satellite-Vacancies/Satellite-Innovations-test-task 
+cd Satellite-Vacancies/
 
 npm run start:all-ngrok
 
