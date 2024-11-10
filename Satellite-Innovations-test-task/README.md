@@ -2,13 +2,13 @@ Satellite Vacancies
 
 1. Clone repository 
 
-git clone git@github.com:AlexeiVinchester/Satellite-Innovations-test-task.git
+git clone git@github.com:AlexeiVinchester/Satellite-Vacancies.git
 
-cd Satellite-Innovations-test-task/Satellite-Innovations-test-task/
+cd Satellite-Vacancies/Satellite-Innovations-test-task           
 
 2. Install dependencies 
 
-npm install (in Satellite-Innovations-test-task/Satellite-Innovations-test-task/) 
+npm install (in Satellite-Vacancies/Satellite-Innovations-test-task ) 
 
 cd frontend/
 
@@ -57,7 +57,7 @@ If you work locally, when your client in localhost and your DB in localhost, thi
 
 - full start 
 
-cd Satellite-Innovations-test-task/Satellite-Innovations-test-task/
+cd Satellite-Vacancies/Satellite-Innovations-test-task 
 
 npm run start:all
 
@@ -99,7 +99,7 @@ npm run start:ngrok
 
 full start 
 
-cd Satellite-Innovations-test-task/Satellite-Innovations-test-task/
+cd Satellite-Vacancies/Satellite-Innovations-test-task 
 
 npm run start:all-ngrok
 
